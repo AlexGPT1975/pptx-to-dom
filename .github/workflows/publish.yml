@@ -1,0 +1,27 @@
+# Publishes to npm when a version tag (v*) is pushed: tests first, then `npm publish` with
+# provenance (npm shows which commit and workflow built the package).
+# Needs the repository secret NPM_TOKEN (npmjs.com > Access Tokens > Granular, "Read and write"
+# for this package). Release: bump "version" in package.json, commit, `git tag v0.1.1 && git push --tags`.
+name: publish
+on:
+  push:
+    tags: ["v*"]
+permissions:
+  contents: read
+  id-token: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm test
+      - name: Tag matches package.json
+        run: test "v$(node -p "require('./package.json').version")" = "$GITHUB_REF_NAME"
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

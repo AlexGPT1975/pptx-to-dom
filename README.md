@@ -70,4 +70,10 @@ npm test            # builds (presets + tsc) and runs the unit tests
 
 ## Licence
 
-MIT, see `LICENSE`. The preset shape definitions are © Ecma International, see `NOTICE.md`.
+MIT © Alexander Odendahl, see `LICENSE`. The preset shape definitions are © Ecma International, see `NOTICE.md`.
+
+## Releasing
+
+1. Bump `version` in `package.json` (semver), commit.
+2. `git tag vX.Y.Z && git push --tags` - the `publish` workflow tests and publishes to npm
+   with provenance. It needs the repository secret `NPM_TOKEN`.
