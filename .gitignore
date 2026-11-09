@@ -1,0 +1,8 @@
+node_modules/
+dist/
+bench/out/
+src/presets.generated.ts
+*.pptx
+!test/fixtures/*.pptx
+.DS_Store
+__pycache__/

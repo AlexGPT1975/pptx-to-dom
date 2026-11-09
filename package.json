@@ -1,0 +1,52 @@
+{
+  "name": "pptx-to-dom",
+  "version": "0.1.0",
+  "description": "Convert PowerPoint (.pptx) slides into editable, absolutely positioned HTML that looks like PowerPoint renders them.",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "pptx-to-dom": "./dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "presets": "node scripts/build-presets.mjs",
+    "build": "npm run presets && tsc -p tsconfig.json",
+    "test": "npm run build && node --test test/*.test.mjs",
+    "prepublishOnly": "npm test"
+  },
+  "keywords": [
+    "pptx",
+    "powerpoint",
+    "html",
+    "dom",
+    "converter",
+    "drawingml",
+    "ooxml",
+    "slides"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.8.10",
+    "jszip": "^3.10.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "typescript": "^5.4.0"
+  }
+}
